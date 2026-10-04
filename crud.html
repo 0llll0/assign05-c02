@@ -51,6 +51,7 @@
         <th>장르</th>
         <th>개봉년도</th>
         <th>평점</th>
+        <th></th>
       </tr>
     </thead>
     <tbody id="movieTableBody">
@@ -82,14 +83,37 @@
           "<td>" + movie.director + "</td>" +
           "<td>" + movie.genre + "</td>" +
           "<td>" + movie.year + "</td>" +
-          "<td>" + movie.rating + "</td>";
+          "<td>" + movie.rating + "</td>" +
+          "<td><button onclick=\"startEdit(" + movie.id + ")\">수정</button></td>";
         tbody.appendChild(tr);
       });
     }
 
     const form = document.getElementById("movieForm");
+    const submitBtn = document.getElementById("submitBtn");
 
-    // Form 제출 시 movies 배열에 데이터를 추가(push)하고 화면을 다시 그린다.
+    // null이면 "추가 모드", 숫자가 들어있으면 "그 id를 수정하는 중"이라는 뜻.
+    let editingId = null;
+
+    // [수정] 버튼 클릭 시: 해당 영화를 find()로 찾아서 Form에 값을 채워준다.
+    function startEdit(id) {
+      const movie = movies.find(function (m) {
+        return m.id === id;
+      });
+      if (!movie) return;
+
+      form.title.value = movie.title;
+      form.director.value = movie.director;
+      form.genre.value = movie.genre;
+      form.year.value = movie.year;
+      form.rating.value = movie.rating;
+
+      editingId = id;
+      submitBtn.innerText = "저장";
+      form.title.focus();
+    }
+
+    // Form 제출 시: editingId가 있으면 수정, 없으면 추가(push).
     form.addEventListener("submit", function (e) {
       e.preventDefault(); // 기본 submit(새로고침) 막기
 
@@ -99,17 +123,32 @@
       const year = form.year.value;
       const rating = form.rating.value;
 
-      const newMovie = {
-        id: nextId,
-        title: title,
-        director: director,
-        genre: genre,
-        year: Number(year),
-        rating: Number(rating),
-      };
+      if (editingId !== null) {
+        // 수정 모드: find()로 배열 안의 해당 객체를 찾아서 값만 바꿔준다.
+        const movie = movies.find(function (m) {
+          return m.id === editingId;
+        });
+        movie.title = title;
+        movie.director = director;
+        movie.genre = genre;
+        movie.year = Number(year);
+        movie.rating = Number(rating);
 
-      movies.push(newMovie);
-      nextId++;
+        editingId = null;
+        submitBtn.innerText = "Add";
+      } else {
+        // 추가 모드
+        const newMovie = {
+          id: nextId,
+          title: title,
+          director: director,
+          genre: genre,
+          year: Number(year),
+          rating: Number(rating),
+        };
+        movies.push(newMovie);
+        nextId++;
+      }
 
       render();
       form.reset();
