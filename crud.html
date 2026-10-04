@@ -9,5 +9,32 @@
 <body>
   <p><a href="index.html">&larr; 목록으로</a></p>
   <h1>영화 관리 (Movie Management)</h1>
+
+  <table id="movieTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>제목</th>
+        <th>감독</th>
+        <th>장르</th>
+        <th>개봉년도</th>
+        <th>평점</th>
+      </tr>
+    </thead>
+    <tbody id="movieTableBody">
+      <!-- render()로 채워짐 -->
+    </tbody>
+  </table>
+
+  <script>
+    // Database 대신 배열을 데이터 저장소로 사용한다.
+    let movies = [
+      { id: 1, title: "인터스텔라", director: "크리스토퍼 놀란", genre: "SF", year: 2014, rating: 9.0 },
+      { id: 2, title: "기생충", director: "봉준호", genre: "드라마", year: 2019, rating: 9.2 },
+      { id: 3, title: "라라랜드", director: "데이미언 셔젤", genre: "드라마", year: 2016, rating: 8.5 },
+    ];
+
+    let nextId = movies.length + 1;
+  </script>
 </body>
 </html>
