@@ -10,6 +10,38 @@
   <p><a href="index.html">&larr; 목록으로</a></p>
   <h1>영화 관리 (Movie Management)</h1>
 
+  <form id="movieForm">
+    <div class="form-row">
+      <label for="title">제목</label>
+      <input type="text" id="title" name="title">
+    </div>
+    <div class="form-row">
+      <label for="director">감독</label>
+      <input type="text" id="director" name="director">
+    </div>
+    <div class="form-row">
+      <label for="genre">장르</label>
+      <select id="genre" name="genre">
+        <option value="">-- 장르 선택 --</option>
+        <option value="액션">액션</option>
+        <option value="드라마">드라마</option>
+        <option value="코미디">코미디</option>
+        <option value="SF">SF</option>
+        <option value="애니메이션">애니메이션</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label for="year">개봉년도</label>
+      <input type="number" id="year" name="year">
+    </div>
+    <div class="form-row">
+      <label for="rating">평점 (0~10)</label>
+      <input type="number" id="rating" name="rating" step="0.1">
+    </div>
+
+    <button type="submit" id="submitBtn">Add</button>
+  </form>
+
   <table id="movieTable">
     <thead>
       <tr>
@@ -54,6 +86,35 @@
         tbody.appendChild(tr);
       });
     }
+
+    const form = document.getElementById("movieForm");
+
+    // Form 제출 시 movies 배열에 데이터를 추가(push)하고 화면을 다시 그린다.
+    form.addEventListener("submit", function (e) {
+      e.preventDefault(); // 기본 submit(새로고침) 막기
+
+      const title = form.title.value.trim();
+      const director = form.director.value.trim();
+      const genre = form.genre.value;
+      const year = form.year.value;
+      const rating = form.rating.value;
+
+      const newMovie = {
+        id: nextId,
+        title: title,
+        director: director,
+        genre: genre,
+        year: Number(year),
+        rating: Number(rating),
+      };
+
+      movies.push(newMovie);
+      nextId++;
+
+      render();
+      form.reset();
+      form.title.focus();
+    });
 
     window.onload = function () {
       render();
