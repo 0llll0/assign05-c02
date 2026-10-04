@@ -35,6 +35,29 @@
     ];
 
     let nextId = movies.length + 1;
+
+    // 배열(movies)의 내용을 테이블에 다시 그려주는 함수.
+    // 데이터가 바뀔 때마다(추가/수정/삭제 후) 이 함수를 다시 호출한다.
+    function render() {
+      const tbody = document.getElementById("movieTableBody");
+      tbody.innerHTML = "";
+
+      movies.forEach(function (movie) {
+        const tr = document.createElement("tr");
+        tr.innerHTML =
+          "<td>" + movie.id + "</td>" +
+          "<td>" + movie.title + "</td>" +
+          "<td>" + movie.director + "</td>" +
+          "<td>" + movie.genre + "</td>" +
+          "<td>" + movie.year + "</td>" +
+          "<td>" + movie.rating + "</td>";
+        tbody.appendChild(tr);
+      });
+    }
+
+    window.onload = function () {
+      render();
+    };
   </script>
 </body>
 </html>
