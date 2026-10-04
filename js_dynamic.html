@@ -9,5 +9,39 @@
 <body>
   <p><a href="index.html">&larr; 목록으로</a></p>
   <h1>JavaScript DOM Practice</h1>
+  <p>Input에 과일 이름을 입력하고 [추가] 버튼을 누르면 아래 목록에 추가됩니다.</p>
+
+  <div class="dom-practice">
+    <input type="text" id="itemInput" placeholder="예: apple">
+    <button id="addBtn">추가</button>
+
+    <ul id="itemList"></ul>
+  </div>
+
+  <script>
+    window.onload = function () {
+      const input = document.getElementById("itemInput");
+      const addBtn = document.querySelector("#addBtn");
+      const list = document.querySelector("#itemList");
+
+      addBtn.addEventListener("click", function () {
+        const value = input.value.trim();
+
+        if (value === "") {
+          alert("내용을 입력해주세요.");
+          input.focus();
+          return;
+        }
+
+        const li = document.createElement("li");
+        li.innerText = value;
+        list.appendChild(li);
+
+        // 추가 후 Input 초기화
+        input.value = "";
+        input.focus();
+      });
+    };
+  </script>
 </body>
 </html>
