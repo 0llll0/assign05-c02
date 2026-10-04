@@ -3,7 +3,7 @@
 22400315 박형찬
 
 - GitHub: https://github.com/2026-2-OSS/assign05-c02-22400315
-- Vercel 배포 URL: (배포 후 기입)
+- Vercel 배포 URL: https://assign05-c02.vercel.app
 
 ## Deployment
 
