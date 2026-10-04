@@ -84,7 +84,10 @@
           "<td>" + movie.genre + "</td>" +
           "<td>" + movie.year + "</td>" +
           "<td>" + movie.rating + "</td>" +
-          "<td><button onclick=\"startEdit(" + movie.id + ")\">수정</button></td>";
+          "<td>" +
+          "<button onclick=\"startEdit(" + movie.id + ")\">수정</button> " +
+          "<button class=\"del-btn\" onclick=\"deleteMovie(" + movie.id + ")\">삭제</button>" +
+          "</td>";
         tbody.appendChild(tr);
       });
     }
@@ -111,6 +114,18 @@
       editingId = id;
       submitBtn.innerText = "저장";
       form.title.focus();
+    }
+
+    // [삭제] 버튼 클릭 시: confirm으로 한 번 확인한 뒤, filter()로 배열에서 제거.
+    function deleteMovie(id) {
+      const confirmed = confirm("삭제하시겠습니까?");
+      if (!confirmed) return;
+
+      movies = movies.filter(function (m) {
+        return m.id !== id;
+      });
+
+      render();
     }
 
     // Form 제출 시: editingId가 있으면 수정, 없으면 추가(push).
