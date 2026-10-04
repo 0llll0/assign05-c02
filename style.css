@@ -1,1 +1,199 @@
-/* assign05 공통 스타일 - 단계별로 채워나갑니다 */
+/* ==========================================================================
+   assign05 공통 스타일
+   index.html / js_dynamic.html / crud.html 에서 같이 사용
+   ========================================================================== */
+
+:root {
+  --brand-color: #2f6f4f;
+  --brand-color-dark: #234f39;
+  --bg-color: #f6f8f6;
+  --border-color: #d9e2dc;
+  --danger-color: #b3261e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", "Malgun Gothic", -apple-system, sans-serif;
+  background-color: var(--bg-color);
+  color: #22302a;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+a {
+  color: var(--brand-color);
+}
+
+h1 {
+  color: var(--brand-color-dark);
+}
+
+/* ---------- index.html 카드 링크 ---------- */
+.page-links {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.page-links a {
+  display: block;
+  padding: 16px;
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--brand-color-dark);
+}
+
+.page-links a:hover {
+  border-color: var(--brand-color);
+  background-color: #eef5f0;
+}
+
+/* ---------- js_dynamic.html: Input + List ---------- */
+.dom-practice {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.dom-practice input[type="text"] {
+  padding: 8px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  width: 60%;
+}
+
+.dom-practice ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 16px;
+}
+
+.dom-practice li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* ---------- Form (crud.html) ---------- */
+form {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.form-row {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-row label {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  padding: 8px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: #ffffff;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--brand-color);
+  box-shadow: 0 0 0 2px rgba(47, 111, 79, 0.15);
+}
+
+/* ---------- Button ---------- */
+button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: var(--brand-color);
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--brand-color-dark);
+}
+
+button.del-btn {
+  background-color: var(--danger-color);
+}
+
+button.del-btn:hover {
+  background-color: #8c1f18;
+}
+
+/* ---------- Table (crud.html) ---------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+th {
+  background-color: #eef5f0;
+  color: var(--brand-color-dark);
+}
+
+tr:hover {
+  background-color: #f6fbf7;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 576px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  thead tr {
+    display: none;
+  }
+
+  td {
+    border-bottom: none;
+    padding: 4px 12px;
+  }
+
+  tr {
+    border-bottom: 1px solid var(--border-color);
+    padding: 8px 0;
+  }
+
+  .dom-practice input[type="text"] {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+}
