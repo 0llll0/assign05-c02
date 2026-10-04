@@ -34,7 +34,21 @@
         }
 
         const li = document.createElement("li");
-        li.innerText = value;
+
+        // 텍스트는 span에, 삭제 버튼은 따로 만들어서 같은 li 안에 넣는다.
+        // (li.innerText로 바로 넣으면 나중에 추가하는 버튼까지 지워지기 때문)
+        const span = document.createElement("span");
+        span.innerText = value;
+
+        const delBtn = document.createElement("button");
+        delBtn.innerText = "삭제";
+        delBtn.className = "del-btn";
+        delBtn.addEventListener("click", function () {
+          li.remove();
+        });
+
+        li.appendChild(span);
+        li.appendChild(delBtn);
         list.appendChild(li);
 
         // 추가 후 Input 초기화
